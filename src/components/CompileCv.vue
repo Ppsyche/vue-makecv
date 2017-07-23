@@ -1,75 +1,44 @@
 <template>
   <div class="compile-cv">
-  	<ul>
-  		<li v-for="(img,n) in imgList" @click="change(n)">
-  			<img v-show="select[n]" :src="img.img1"/>
-  			<img v-show="!select[n]" :src="img.img2"/>
-  		</li>
-  	</ul>
-
-
+    <ul class="nav nav-pills nav-stacked">
+      <li v-for="(li,n) in liList" @click="change(n)" role="presentation">
+        <a href="#" :class="'glyphicon glyphicon-'+li"></a>
+      </li>
+    </ul>
+    <div class="input-box">
+      <add-one></add-one>
+    </div>
     
   </div>
 </template>
 
 <script>
+import addOne from './add/addOne'
 import $ from 'jquery'
 export default {
   data () {
     return {
-      select:[true,false,false,false,false,false],
-      // imgs:["xinxi","jiaoyu","shixi","zhiwei","jineng","xiangmu"],
-      imgList:[
-      	{
-      		"img1":require("../assets/img/xinxi.png"),
-      		"img2":require("../assets/img/xinxi2.png")
-     	},
-      	{
-      		"img1":require("../assets/img/jiaoyu.png"),
-      		"img2":require("../assets/img/jiaoyu2.png")
-      	},
-      	{
-      		"img1":require("../assets/img/shixi.png"),
-      		"img2":require("../assets/img/shixi2.png")
-      	},
-      	{
-      		"img1":require("../assets/img/zhiwei.png"),
-      		"img2":require("../assets/img/zhiwei2.png")
-      	},
-      	{
-      		"img1":require("../assets/img/jineng.png"),
-      		"img2":require("../assets/img/jineng2.png")
-      	},
-      	{
-      		"img1":require("../assets/img/xiangmu.png"),
-      		"img2":require("../assets/img/xiangmu2.png")
-      	}]
+     liList:["home","user","book","pencil","briefcase","folder-open"],
+     show:false
     }
+  },
+  components: {
+    addOne,
   },
   mounted(){
   	this.change(0);
   },
   methods:{
-  	change(n){
-  		for (var i = 0; i < this.select.length; i++) {
-  			if(i!=n){
-  				this.select[i] = false;
-  			}else{
-  				this.select[i] = true;
-  			}
-  			if(this.select[i]){
-  				$('ul li img').css('background','#000');
-  				$('ul').find('li').eq(i).find('img').css('background','#fff');
-  			}
-  		}
-  	}
+  	 change(n){
+        $("li").eq(n).addClass("active").siblings().removeClass("active");
+     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	@import "../assets/css/reset.css";
+	@import "../assets/lib/bootstrap/css/bootstrap.css";
 	.compile-cv{
 		width: 30vw;
 		height: 90vh;
@@ -82,14 +51,32 @@ export default {
 	ul{
 		float: left;
 		width: 5vw;
-		height: 87vh;
+		height: 90vh;
 		/*background: #5e9fa1;*/
-		background: #000;
+		background: #c71223;
 		padding-top: 3vh;
 	}
-	img{
-		/*background: #ccc;*/
-		width: 3vw;
-		padding: 1vw;
-	}
+  li a{
+    width: 5vw;
+    height: 3.4vw;
+    border-radius: 0;
+    font-size: 2em;
+    /*background: #c71223;*/
+    color: #fff;
+    margin-top: 1vh;
+  }
+  .nav>li>a:hover, .nav>li>a:focus {
+    background: #fff;
+    color: #c71223;
+  }
+  .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+    background: #fff;
+    color: #c71223;
+  }
+  .input-box{
+    float: left;
+    width: 20vw;
+    padding: 3vw 1vw;
+  }
+
 </style>

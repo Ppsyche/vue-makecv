@@ -18,7 +18,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	@import "../assets/css/reset.css";
+@import "../assets/lib/bootstrap/css/bootstrap.css";
 	.show-cv{
 		width: 61.5vw;
 		height: 90vh;
